@@ -43,6 +43,7 @@ If you want to help with translations, open a [Pull Request](https://github.com/
 * Simplified Chinese by [Nriver](https://github.com/Nriver)
 * Traditional Chinese by [abc0922001](https://github.com/abc0922001)
 * Turkish by [kyoyacchi](https://github.com/kyoyacchi)
+* Japanese by [anonym499](https://github.com/anonym499)
 
 # Feedback
 - To give feedback and request new features go to [Discussions](https://github.com/rumboalla/apkupdater/discussions).
