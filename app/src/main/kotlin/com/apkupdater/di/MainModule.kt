@@ -184,11 +184,13 @@ val mainModule = module {
 
 	single { PlayHttpClient(get()) }
 
+	single { com.apkupdater.repository.DownloadedApkRepository(androidContext()) }
+
 	viewModel { MainViewModel(get(), get()) }
 
 	viewModel { AppsViewModel(get(), get(), get()) }
 
-	viewModel { UpdatesViewModel(get(), get(), get(), get(), get(), get(), get(), get()) }
+	viewModel { UpdatesViewModel(get(), get(), get(), get(), get(), get(), get(), get(), get()) } // Added DownloadedApkRepository
 
 	viewModel { SettingsViewModel(get(), get(), WorkManager.getInstance(get()), get(), get(), get(), get()) }
 

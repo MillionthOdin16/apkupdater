@@ -161,3 +161,44 @@ fun filterVersionTag(version: String) = version
 fun Float.to2f() = String
 	.format("%.2f", this)
 	.replace('.', DecimalFormatSymbols.getInstance(Locale.getDefault()).decimalSeparator)
+
+
+/**
+ * Launches an intent to install an APK file.
+ *
+ * @param filePath The absolute path to the .apk file.
+ * @param onSuccess Callback if the intent was successfully launched.
+ * @param onFailure Callback if there was an error launching the intent (e.g., file not found, no activity to handle).
+ */
+fun Context.launchInstallIntent(filePath: String, onSuccess: () -> Unit = {}, onFailure: (Exception) -> Unit = {}) {
+    try {
+        val file = File(filePath)
+        if (!file.exists()) {
+            Log.e("launchInstallIntent", "File not found: $filePath")
+            onFailure(FileNotFoundException("File not found: $filePath"))
+            return
+        }
+
+        val authority = "${this.packageName}.fileprovider" // Matches AndroidManifest
+        val contentUri = androidx.core.content.FileProvider.getUriForFile(this, authority, file)
+
+        val installIntent = Intent(Intent.ACTION_INSTALL_PACKAGE).apply { // Or Intent.ACTION_VIEW
+            setDataAndType(contentUri, "application/vnd.android.package-archive")
+            flags = Intent.FLAG_GRANT_READ_URI_PERMISSION or Intent.FLAG_ACTIVITY_NEW_TASK
+            // FLAG_ACTIVITY_NEW_TASK might be needed if launching from a non-activity context,
+            // but usually handled by system if launched from activity/fragment.
+        }
+
+        // Check if there's an activity to handle this intent
+        if (installIntent.resolveActivity(this.packageManager) != null) {
+            this.startActivity(installIntent)
+            onSuccess()
+        } else {
+            Log.e("launchInstallIntent", "No activity found to handle APK installation intent for $filePath")
+            onFailure(ActivityNotFoundException("No app can handle APK installation."))
+        }
+    } catch (e: Exception) {
+        Log.e("launchInstallIntent", "Error launching install intent for $filePath: ${e.message}", e)
+        onFailure(e)
+    }
+}

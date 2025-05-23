@@ -31,6 +31,8 @@
     <string name="settings_alarm">Alarm</string>
     <string name="settings_options">Options</string>
     <string name="settings_utils">Utils</string>
+    <string name="settings_apkmirror_automatic_downloads">Enable automatic downloads from APKMirror</string>
+    <string name="settings_apkmirror_download_on_wifi_only">Download on Wi-Fi only</string>
     <string name="settings_hour">Alarm Hour</string>
     <string name="settings_alarm_daily">Daily</string>
     <string name="settings_alarm_3day">3-Day</string>
@@ -63,6 +65,8 @@
 
     // Notifications
     <string name="notification_channel_name">Updates</string>
+    <string name="notification_channel_apkmirror_downloads">APKMirror Downloads</string>
+    <string name="notification_channel_apkmirror_downloads_description">Notifications for APKMirror automatic downloads.</string>
     <string name="notification_channel_description">Channel for update notifications.</string>
     <string name="notification_channel_id" translatable="false">updateChannel</string>
     <string name="notification_update_title">Updates</string>
@@ -71,5 +75,21 @@
         <item quantity="one">Found %1$d update.</item>
         <item quantity="other">Found %1$d updates.</item>
     </plurals>
+
+    <!-- Strings for APKMirror Summary Notification -->
+    <plurals name="apkmirror_summary_title">
+        <item quantity="one">%d APKMirror update downloaded</item>
+        <item quantity="other">%d APKMirror updates downloaded</item>
+    </plurals>
+    <string name="apkmirror_summary_content_single">%1$s is ready to install.</string>
+    <string name="apkmirror_summary_content_multiple">%1$s and others are ready to install.</string>
+    <string name="apkmirror_summary_content_multiple_more">%1$s and %2$d others are ready to install.</string>
+
+    <!-- Strings for Downloaded APKs section in Updates Screen -->
+    <string name="downloaded_apks_title">Downloaded APKs (%d)</string>
+    <string name="install_all_downloaded_apks">Install All Downloaded (%d)</string>
+    <string name="clear_all_downloaded_apks">Clear All Downloaded</string>
+    <string name="tap_to_install_individually_swipe_to_delete">Tap to install, swipe or tap icon to delete.</string>
+    <string name="no_regular_updates_found">No regular updates found. Check downloaded APKs above if any.</string>
 
 </resources>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<paths xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Path for APKs downloaded by ApkMirrorUpdateWorker -->
+    <cache-path
+        name="apk_mirror_downloads"
+        path="apk_mirror_downloads/" />
+
+    <!-- Path for general cache, useful for other update sources if they use cache -->
+    <cache-path
+        name="cache"
+        path="." />
+
+    <!-- Example for external cache, if ever needed -->
+    <!-- <external-cache-path name="external_cache" path="." /> -->
+</paths>

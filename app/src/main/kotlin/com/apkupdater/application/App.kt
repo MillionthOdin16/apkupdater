@@ -10,6 +10,7 @@ import org.koin.android.ext.koin.androidLogger
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.get
 import org.koin.core.context.startKoin
+import com.apkupdater.worker.ApkMirrorUpdateWorkerCompanion // Import the companion
 
 class App : Application(), ImageLoaderFactory, KoinComponent {
 
@@ -21,6 +22,11 @@ class App : Application(), ImageLoaderFactory, KoinComponent {
 			androidContext(this@App)
 			modules(mainModule)
 		}
+
+		// Schedule the ApkMirrorUpdateWorker
+		// The ApkMirrorUpdateWorkerCompanion.scheduleUsingKoin(this) will internally
+		// get Prefs via Koin to check if scheduling is enabled.
+		ApkMirrorUpdateWorkerCompanion.scheduleUsingKoin(this)
 	}
 
 	override fun newImageLoader() = ImageLoader

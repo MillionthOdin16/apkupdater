@@ -218,6 +218,35 @@ fun Settings(viewModel: SettingsViewModel) = LazyColumn {
 			stringResource(R.string.source_apkmirror),
 			R.drawable.ic_apkmirror
 		)
+
+		val apkMirrorEnabled = remember { mutableStateOf(viewModel.getUseApkMirror()) }
+		// This is to ensure the dependent switches update when the main UseApkMirror switch changes
+		apkMirrorEnabled.value = viewModel.getUseApkMirror()
+
+		if (apkMirrorEnabled.value) {
+			SwitchSetting(
+				getValue = { viewModel.getApkMirrorAutomaticDownloadsEnabled() },
+				setValue = { viewModel.setApkMirrorAutomaticDownloadsEnabled(it) },
+				text = stringResource(R.string.settings_apkmirror_automatic_downloads), // Needs to be added to strings.xml
+				icon = R.drawable.ic_download, // Generic download icon, replace if a better one exists
+				modifier = Modifier.padding(start = 16.dp) // Indent for sub-setting
+			)
+
+			val apkMirrorAutoDownloadEnabled = remember { mutableStateOf(viewModel.getApkMirrorAutomaticDownloadsEnabled()) }
+			// This is to ensure the dependent Wi-Fi only switch updates
+			apkMirrorAutoDownloadEnabled.value = viewModel.getApkMirrorAutomaticDownloadsEnabled()
+
+			if (apkMirrorAutoDownloadEnabled.value) {
+				SwitchSetting(
+					getValue = { viewModel.getApkMirrorDownloadOnWifiOnly() },
+					setValue = { viewModel.setApkMirrorDownloadOnWifiOnly(it) },
+					text = stringResource(R.string.settings_apkmirror_download_on_wifi_only), // Needs to be added to strings.xml
+					icon = R.drawable.ic_wifi, // Generic Wi-Fi icon, replace if a better one exists
+					modifier = Modifier.padding(start = 32.dp) // Further indent for sub-sub-setting
+				)
+			}
+		}
+
 		SwitchSetting(
 			{ viewModel.getUseFdroid() },
 			{ viewModel.setUseFdroid(it) },

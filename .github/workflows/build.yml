@@ -30,6 +30,14 @@ jobs:
         BUILD_NUMBER: ${{ github.run_number }}
       run: ./gradlew build
 
+    - name: Upload Release APK Artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: apkupdater-release-apk-${{ github.run_number }}
+        path: ./app/build/outputs/apk/release/com.apkupdater.ci-release.apk
+        if-no-files-found: error # Fails the workflow if the APK is not found
+        retention-days: 7 # Keeps artifacts for 7 days
+
     - name: Get current branch name
       run: echo "BRANCH=$(git rev-parse --abbrev-ref HEAD)" >> $GITHUB_ENV
 
